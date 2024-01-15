@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bclxe42pg15xc"]
+
+[ext_resource type="Script" path="res://movement.gd" id="1_nrf1c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e1c7j"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jwj1n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54xjl"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qimyx"]
+material = SubResource("StandardMaterial3D_54xjl")
+top_radius = 0.1
+
+[node name="PlayerMaster" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0003, 0.838207, -6.67855)
+
+[node name="Humanoid" type="RigidBody3D" parent="."]
+lock_rotation = true
+linear_damp = 3.0
+script = ExtResource("1_nrf1c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Humanoid"]
+transform = Transform3D(-0.994956, 0, -0.10031, 0, 1, 0, 0.10031, 0, -0.994956, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_e1c7j")
+
+[node name="Body" type="MeshInstance3D" parent="Humanoid"]
+transform = Transform3D(-0.994956, 0, -0.10031, 0, 1, 0, 0.10031, 0, -0.994956, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_jwj1n")
+skeleton = NodePath("")
+
+[node name="Nose" type="MeshInstance3D" parent="Humanoid"]
+transform = Transform3D(-0.0994079, 0.0108659, 4.74962e-10, 1.52257e-16, -4.37114e-09, 0.1, 0.0108659, 0.0994079, 4.34526e-09, 0.0600681, 1.448, 0.531852)
+mesh = SubResource("CylinderMesh_qimyx")
+skeleton = NodePath("")
+
+[node name="CameraArm" type="SpringArm3D" parent="Humanoid"]
+transform = Transform3D(1, 0, 0, 0, 0.971858, -0.235566, 0, 0.235566, 0.971858, 0, 2.5553, 0)
+spring_length = -5.0
+
+[node name="Camera3D" type="Camera3D" parent="Humanoid/CameraArm"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
