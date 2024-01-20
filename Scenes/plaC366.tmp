@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://bclxe42pg15xc"]
+
+[ext_resource type="Script" path="res://Scripts/playerControl.gd" id="1_ncdw4"]
+[ext_resource type="Script" path="res://Scenes/masterScript.gd" id="1_wmmt4"]
+[ext_resource type="Script" path="res://Scenes/BallMovement.gd" id="3_j7aix"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jwj1n"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e1c7j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54xjl"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qimyx"]
+material = SubResource("StandardMaterial3D_54xjl")
+top_radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_nqo2e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n46ob"]
+
+[node name="PlayerMaster" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0003, 0.838207, -6.67855)
+script = ExtResource("1_wmmt4")
+
+[node name="Humanoid" type="CharacterBody3D" parent="."]
+collision_layer = 2
+script = ExtResource("1_ncdw4")
+
+[node name="Body" type="MeshInstance3D" parent="Humanoid"]
+transform = Transform3D(-0.994956, 0, -0.10031, 0, 1, 0, 0.10031, 0, -0.994956, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_jwj1n")
+skeleton = NodePath("")
+
+[node name="Collider" type="CollisionShape3D" parent="Humanoid"]
+transform = Transform3D(-0.994956, 0, -0.10031, 0, 1, 0, 0.10031, 0, -0.994956, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_e1c7j")
+
+[node name="Nose" type="MeshInstance3D" parent="Humanoid"]
+transform = Transform3D(-0.0994079, 0.0108659, 4.74962e-10, 1.52257e-16, -4.37114e-09, 0.1, 0.0108659, 0.0994079, 4.34526e-09, 0.0600681, 1.448, 0.531852)
+mesh = SubResource("CylinderMesh_qimyx")
+skeleton = NodePath("")
+
+[node name="CameraArm" type="SpringArm3D" parent="Humanoid"]
+transform = Transform3D(1, 0, 0, 0, 0.971858, -0.235566, 0, 0.235566, 0.971858, 0, 2.5553, 0)
+spring_length = -5.0
+
+[node name="Camera3D" type="Camera3D" parent="Humanoid/CameraArm"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Ball" type="RigidBody3D" parent="."]
+visible = false
+collision_layer = 2
+mass = 2.0
+script = ExtResource("3_j7aix")
+SPEED_ACL = null
+SPEED_DCL = null
+JUMP_VELOCITY = null
+MOUSE_SENS = null
+SLIDE_SPEED = null
+
+[node name="FloorCast" type="RayCast3D" parent="Ball"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Ball"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("SphereMesh_nqo2e")
+
+[node name="Collider" type="CollisionShape3D" parent="Ball"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_n46ob")
+
+[node name="CameraArm" type="SpringArm3D" parent="Ball"]
+transform = Transform3D(1, 0, 0, 0, 0.971858, -0.235566, 0, 0.235566, 0.971858, 0, 2.5553, 0)
+spring_length = -5.0
+
+[node name="Camera3D" type="Camera3D" parent="Ball/CameraArm"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
