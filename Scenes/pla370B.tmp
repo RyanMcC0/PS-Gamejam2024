@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bclxe42pg15xc"]
+[gd_scene load_steps=10 format=3 uid="uid://bclxe42pg15xc"]
 
 [ext_resource type="Script" path="res://Scripts/playerControl.gd" id="1_ncdw4"]
 [ext_resource type="Script" path="res://Scenes/masterScript.gd" id="1_wmmt4"]
@@ -15,15 +15,7 @@ albedo_color = Color(0, 1, 1, 1)
 material = SubResource("StandardMaterial3D_54xjl")
 top_radius = 0.1
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_lecjw"]
-radius = 0.1
-height = 4.002
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_of7bu"]
-albedo_color = Color(1, 0.745098, 1, 1)
-
 [sub_resource type="SphereMesh" id="SphereMesh_nqo2e"]
-material = SubResource("StandardMaterial3D_of7bu")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n46ob"]
 
@@ -59,33 +51,27 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 [node name="Ball" type="RigidBody3D" parent="."]
 visible = false
 collision_layer = 2
-axis_lock_angular_z = true
 mass = 2.0
-linear_damp = 0.1
-angular_damp = 1.5
 script = ExtResource("3_j7aix")
+SPEED_ACL = null
+SPEED_DCL = null
+JUMP_VELOCITY = null
+MOUSE_SENS = null
+SLIDE_SPEED = null
 
 [node name="FloorCast" type="RayCast3D" parent="Ball"]
 transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
 
-[node name="Node3D" type="Node3D" parent="Ball"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.113937, 0)
-mesh = SubResource("CapsuleMesh_lecjw")
-skeleton = NodePath("../..")
-
-[node name="Body" type="MeshInstance3D" parent="Ball/Node3D"]
+[node name="Body" type="MeshInstance3D" parent="Ball"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("SphereMesh_nqo2e")
-skeleton = NodePath("../..")
 
 [node name="Collider" type="CollisionShape3D" parent="Ball"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_n46ob")
 
 [node name="CameraArm" type="SpringArm3D" parent="Ball"]
-transform = Transform3D(1, 0, 0, 0, 0.971961, -0.235142, 0, 0.235142, 0.971961, 0.0115929, 3.37181, 0.0315495)
+transform = Transform3D(1, 0, 0, 0, 0.971858, -0.235566, 0, 0.235566, 0.971858, 0, 2.5553, 0)
 spring_length = -5.0
 
 [node name="Camera3D" type="Camera3D" parent="Ball/CameraArm"]

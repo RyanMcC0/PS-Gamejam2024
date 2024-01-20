@@ -32,6 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0003, 0.838207, -6.67855)
 script = ExtResource("1_wmmt4")
 
 [node name="Humanoid" type="CharacterBody3D" parent="."]
+visible = false
 collision_layer = 2
 script = ExtResource("1_ncdw4")
 
@@ -57,12 +58,8 @@ spring_length = -5.0
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Ball" type="RigidBody3D" parent="."]
-visible = false
 collision_layer = 2
-axis_lock_angular_z = true
 mass = 2.0
-linear_damp = 0.1
-angular_damp = 1.5
 script = ExtResource("3_j7aix")
 
 [node name="FloorCast" type="RayCast3D" parent="Ball"]
@@ -85,7 +82,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_n46ob")
 
 [node name="CameraArm" type="SpringArm3D" parent="Ball"]
-transform = Transform3D(1, 0, 0, 0, 0.971961, -0.235142, 0, 0.235142, 0.971961, 0.0115929, 3.37181, 0.0315495)
+transform = Transform3D(1, 0, 0, 0, 0.971858, -0.235566, 0, 0.235566, 0.971858, 0, 2.5553, 0)
 spring_length = -5.0
 
 [node name="Camera3D" type="Camera3D" parent="Ball/CameraArm"]
